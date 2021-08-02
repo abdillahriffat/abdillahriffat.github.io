@@ -160,14 +160,14 @@
       </div>
       <div class="row justify-content-center">
         <div class="col-md-6">
-          <form>
+          <form name="komentar-form">
             <div class="mb-3">
               <label for="name" class="form-label">Nama</label>
-              <input type="text" class="form-control" id="nama" aria-describedby="name" placeholder="Nama">
+              <input type="text" class="form-control" id="nama" aria-describedby="nama" placeholder="Nama" name="nama">
             </div>
             <div class="mb-3">
               <label for="pesan" class="form-label">Komentar</label>
-              <textarea class="form-control" id="Messagepesan" rows="3" placeholder="Komentar"></textarea>
+              <textarea class="form-control" id="komentar" rows="3" placeholder="Komentar" name="komentar"></textarea>
             </div>
             <button type="submit" class="btn btn-danger">Kirim</button>
           </form>
@@ -234,6 +234,18 @@
     });
   </script>
 
+  <script>
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbygeIoalvWDiogUNftX9fYYD4AlDXtcWMmT4d_kp1SCboXWHpXSHqCWnL6y9xtZ30SLZQ/exec'
+  const form = document.forms['komentar-form']
+
+  form.addEventListener('submit', e => {
+    e.preventDefault()
+    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+      .then(response => console.log('Success!', response))
+      .catch(error => console.error('Error!', error.message))
+  })
+</script>
+  
 </body>
 
 </html>
